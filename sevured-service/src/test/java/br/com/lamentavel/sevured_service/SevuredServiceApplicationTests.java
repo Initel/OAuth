@@ -1,10 +1,10 @@
-package br.lamentina.resource_sever;
+package br.com.lamentavel.sevured_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ResourceSeverApplicationTests {
+class SevuredServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
