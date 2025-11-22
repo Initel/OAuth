@@ -43,7 +43,7 @@ function Profile() {
             {principal && principal.userAttributes && Object.entries(principal.userAttributes)
               .map(([key, value]) => (
                 <li key={key}>
-                  <span style={{ fontWeight: 'bold' }} >{key}</span>: <span
+                  <span style={ { fontWeight: 'bold' }} >{key}</span>: <span
                   >{value}</span>
                 </li>
               ))
