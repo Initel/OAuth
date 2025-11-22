@@ -1,6 +1,5 @@
-sever:
-  port: 9090
-
+server:
+  port: 8000
 spring:
   application:
     name: gateway
@@ -10,20 +9,19 @@ spring:
       client:
         registration:
           keycloak:
-            client-id: springboot-oauth 
-            client-secret: iouGciTxVIa0cXvYApFVsiz77cew2Lpf
+            client-id: springboot-oauth
+            client-secret: N6HGqrtDZtN6xiUK55gqq5YPLV5izebB
             scope: openid, email, profile
-            redirerct-uri: http://localhost:3000/callback
-          provider:
-            keycloak:
-              issuer-uri: http://localhost:8080/realms/master
-
+            redirect-uri: http://localhost:3000/callback
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/master
   cloud:
     gateway:
       routes:
-      - id: resource
-        uri: http://localhost:9000
-        predicates:
-          - Path=/resource
-        filters:
-          - TokenRelay=
+        - id: resource
+          uri: http://localhost:9000
+          predicates:
+            - Path=/resource
+          filters:
+            - TokenRelay=
