@@ -1,13 +1,13 @@
-package br.com.lamentavel.sevured_service;
+package com.br.lamentavel.secured_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SevuredServiceApplication {
+public class SecuredServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SevuredServiceApplication.class, args);
+		SpringApplication.run(SecuredServiceApplication.class, args);
 	}
 
 }

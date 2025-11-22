@@ -1,10 +1,10 @@
-package br.com.lamentavel.sevured_service;
+package com.br.lamentavel.secured_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SevuredServiceApplicationTests {
+class SecuredServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

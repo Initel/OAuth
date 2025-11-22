@@ -8,10 +8,10 @@
 		<version>4.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.lamentavel</groupId>
-	<artifactId>sevured-service</artifactId>
+	<groupId>com.br.lamentavel</groupId>
+	<artifactId>secured-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sevured-service</name>
+	<name>secured-service</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
