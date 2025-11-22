@@ -16,6 +16,8 @@ public class SecuredServiceApplication {
 	}
 
 }
+
+//faz a verificação do token via JWT 
 @RestController
 class ResourceController {
 	@GetMapping("resource")
