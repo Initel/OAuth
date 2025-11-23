@@ -43,8 +43,11 @@ A aplicação é dividida em **três módulos**:
   Serviço             Porta
   ------------------- -------
   Keycloak            8080
+
   API Gateway         9000
+
   Secured Service     8000
+  
   Front-End (React)   3000
 
 ------------------------------------------------------------------------
@@ -78,8 +81,8 @@ A aplicação é dividida em **três módulos**:
 
 ## Clone o repositório
 
-    git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
-    cd SEU_REPOSITORIO
+    git clone https://github.com/Initel/OAuth.git
+    cd OAuth
 
 ------------------------------------------------------------------------
 
@@ -112,7 +115,7 @@ Acesse o painel:\
     npm install
     npm run dev
 
-Acesse: http://localhost:5173/
+Acesse: http://localhost:3000/
 
 ------------------------------------------------------------------------
 
