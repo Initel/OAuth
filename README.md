@@ -9,19 +9,24 @@ múltiplos serviços.
 
 A aplicação é dividida em **três módulos**:
 
--   **Gateway** --- Responsável pelo roteamento e segurança centralizada
+-   **Gateway** --- Responsável pelo roteamento e segurança
+    centralizada\
 -   **Secured Service** --- API protegida que só pode ser acessada com
-    token válido
+    token válido\
 -   **Front-End (React)** --- Interface web para testes do fluxo de
     autenticação
 
-## 📌 Visão Geral da Arquitetura
+------------------------------------------------------------------------
+
+## Visão Geral da Arquitetura
 
     React (Front-End)  →  API Gateway (Spring Boot)  →  Secured Service (Spring Boot)
                                ↓
                            Keycloak (OIDC Provider)
 
-## 🚀 Funcionalidades
+------------------------------------------------------------------------
+
+## Funcionalidades
 
 ✔ Autenticação via **Keycloak**\
 ✔ Fluxo **Authorization Code** com PKCE\
@@ -31,16 +36,20 @@ A aplicação é dividida em **três módulos**:
 ✔ Tokens repassados corretamente para o serviço protegido\
 ✔ Projeto modular, ideal para estudos, demos e empresas
 
-## 🔌 Mapeamento de Portas
+------------------------------------------------------------------------
 
-  Serviço             Porta   Descrição
-  ------------------- ------- -------------------------------------
-  Keycloak            8081    Servidor de autenticação
-  API Gateway         8080    Entrada das requisições e validação
-  Secured Service     8082    Microserviço protegido
-  Front-End (React)   5173    Interface de testes
+## Mapeamento de Portas
 
-## 🧰 Tecnologias Utilizadas
+  Serviço             Porta
+  ------------------- -------
+  Keycloak            8080
+  API Gateway         9000
+  Secured Service     8000
+  Front-End (React)   3000
+
+------------------------------------------------------------------------
+
+## Tecnologias Utilizadas
 
 ### Back-end
 
@@ -63,83 +72,158 @@ A aplicação é dividida em **três módulos**:
 -   Docker / Podman\
 -   Keycloak
 
-## 🛠️ Como Executar o Projeto
+------------------------------------------------------------------------
 
-### 1️⃣ Clone o repositório
+# 🛠️ Como Executar o Projeto
+
+## Clone o repositório
 
     git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
     cd SEU_REPOSITORIO
 
-### 2️⃣ Suba o Keycloak com Docker
+------------------------------------------------------------------------
+
+## Suba o Keycloak com Docker
 
     docker run -d   --name keycloak   -p 8081:8080   -e KEYCLOAK_ADMIN=admin   -e KEYCLOAK_ADMIN_PASSWORD=admin   quay.io/keycloak/keycloak:latest   start-dev
 
-### 3️⃣ Inicie o API Gateway
+Acesse o painel:\
+👉 http://localhost:8081/
+
+------------------------------------------------------------------------
+
+## Inicie o Gateway
 
     cd gateway
     ./mvnw spring-boot:run
 
-### 4️⃣ Inicie o Secured Service
+------------------------------------------------------------------------
+
+## Inicie o Secured Service
 
     cd secured-service
     ./mvnw spring-boot:run
 
-### 5️⃣ Inicie o Front-End (React)
+------------------------------------------------------------------------
+
+## Inicie o Front-End
 
     cd front-end
     npm install
     npm run dev
 
-## ▶️ Fluxo de Teste
+Acesse: http://localhost:5173/
+
+------------------------------------------------------------------------
+
+# Fluxo de Teste
 
 1.  Abra o front-end\
 2.  Clique em **Login**\
-3.  Você será enviado ao Keycloak\
-4.  Faça login\
-5.  Você será redirecionado de volta ao React com o token\
-6.  Clique em **Chamar API Protegida**\
-7.  O front envia o token → Gateway → Secured Service\
-8.  A resposta protegida é exibida na tela
+3.  Faça login no Keycloak\
+4.  Retorne ao front com o token\
+5.  Clique em **Chamar API Protegida**\
+6.  Requisição → Gateway → Secured Service\
+7.  Resposta protegida exibida
 
-## 📁 Estrutura do Projeto
+------------------------------------------------------------------------
+
+# Estrutura do Projeto
 
     /gateway
-        - Configurações de segurança
-        - Roteamento
-        - Validação de token JWT
-
     /secured-service
-        - Endpoints protegidos
-        - Regras de autorização
-
     /front-end
-        - React + Vite
-        - Telas de Login e Testes de API
+    /docs
 
-## 🎯 Objetivo do Projeto
+------------------------------------------------------------------------
 
-Este projeto foi criado para:
+# Apontamentos Técnicos
 
--   Demonstrar uma arquitetura prática usando **OpenID Connect + SSO**
--   Servir como base para estudos sobre segurança moderna
--   Ajudar empresas a integrarem OIDC em microserviços
--   Servir como template para projetos corporativos
--   Mostrar como integrar React, Gateway e serviços protegidos com
-    Keycloak
+## Secured Service
 
-## 🧭 Roadmap
+### application.properties
 
--   [ ] Adicionar Refresh Token no front-end\
--   [ ] Criar docker-compose unificado\
--   [ ] Adicionar RBAC completo (Roles e Groups do Keycloak)\
--   [ ] Criar documentação detalhada em /docs\
--   [ ] Adicionar testes automatizados de segurança
+-   Linha 1 --- **Própria porta do serviço**\
+-   Linha 6 --- **URI do Keycloak (com o realm)**
 
-## 🤝 Contribuição
+**Porta usada nos testes:** **9000**
 
-Contribuições são muito bem-vindas!\
-Abra uma issue ou envie um pull request com melhorias.
+------------------------------------------------------------------------
 
-## 📄 Licença
+## 🚪 Gateway
 
-Este projeto está sob a licença MIT.
+### application.yml
+
+-   Linha 2 --- **Porta do gateway**\
+-   Linha 13 --- **Client ID (Keycloak)**\
+-   Linha 14 --- **Client Secret (Keycloak)**\
+-   Linha 16 --- **URI do front-end + `/callback`** (deve estar
+    cadastrada no Keycloak)\
+-   Linha 19 --- **URI do Realm**\
+-   Linha 25 --- **URI + porta do Secured Service**
+
+### SecurityConfig.java
+
+-   Linha 27 --- **Página para redirecionamento após login**
+
+### GatewayApplication.java
+
+Contém lógica extra de mapeamento das informações do usuário
+autenticado, útil para integração com outros serviços.
+
+**Porta usada nos testes:** **8000**
+
+------------------------------------------------------------------------
+
+## 🖥️ Front-End (React + Vite)
+
+Dependências básicas importantes:\
+- Axios\
+- React Router
+
+### App.jsx
+
+-   Tela de login\
+-   Linha 14 --- **URL do front com porta + token**
+
+### Vite.config.js
+
+-   Linha 10 --- Regras relacionadas ao Gateway\
+-   Linha 16 --- Informações do usuário\
+-   Linha 22\
+-   Linha 28
+
+### Profile.jsx
+
+-   Linha 9 --- **URI do front com `/userinfo`**\
+-   Observação: recomenda-se migrar para memória temporária para evitar
+    chamadas repetidas.
+
+**Porta usada nos testes:** **3000**
+
+------------------------------------------------------------------------
+
+# Objetivo do Projeto
+
+-   Demonstrar arquitetura real com **SSO + OIDC**\
+-   Template completo para empresas\
+-   Base de estudo para microserviços seguros\
+-   Integração total entre React, Gateway e serviços protegidos
+
+------------------------------------------------------------------------
+
+# Roadmap
+
+-   [ ] Suporte a Refresh Token\
+-   [ ] docker-compose unificado\
+-   [ ] RBAC completo no Keycloak\
+-   [ ] Documentação detalhada\
+-   [ ] Testes automatizados
+
+------------------------------------------------------------------------
+
+# Contribuição
+
+Pull Requests e Issues são bem-vindos!
+
+------------------------------------------------------------------------
