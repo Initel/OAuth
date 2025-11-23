@@ -47,7 +47,7 @@ A aplicação é dividida em **três módulos**:
   API Gateway         9000
 
   Secured Service     8000
-  
+
   Front-End (React)   3000
 
 ------------------------------------------------------------------------
@@ -77,7 +77,7 @@ A aplicação é dividida em **três módulos**:
 
 ------------------------------------------------------------------------
 
-# 🛠️ Como Executar o Projeto
+# Como Executar o Projeto
 
 ## Clone o repositório
 
@@ -88,10 +88,10 @@ A aplicação é dividida em **três módulos**:
 
 ## Suba o Keycloak com Docker
 
-    docker run -d   --name keycloak   -p 8081:8080   -e KEYCLOAK_ADMIN=admin   -e KEYCLOAK_ADMIN_PASSWORD=admin   quay.io/keycloak/keycloak:latest   start-dev
+    docker run -d   --name keycloak   -p 8080:8080   -e KEYCLOAK_ADMIN=admin   -e KEYCLOAK_ADMIN_PASSWORD=admin   quay.io/keycloak/keycloak:latest   start-dev
 
 Acesse o painel:\
-👉 http://localhost:8081/
+👉 http://localhost:8080/
 
 ------------------------------------------------------------------------
 
